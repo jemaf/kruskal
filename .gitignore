@@ -14,3 +14,4 @@ hs_err_pid*
 # intellij configuration files.
 .idea/modules.xml
 .idea/workspace.xml
+.idea/
