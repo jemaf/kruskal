@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String args[]) {
 
-        DisjointTreeSet<Integer> disjointTreeSet = new DisjointTreeSet<Integer>();
+       DisjointTreeSet<Integer> disjointTreeSet = new DisjointTreeSet<Integer>();
 
         ArrayList<Integer> arrayList = new ArrayList<Integer>();
         arrayList.add(1);
