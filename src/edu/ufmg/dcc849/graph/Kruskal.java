@@ -26,7 +26,7 @@ public class Kruskal<T extends Comparable<T>> {
         List<Edge<T>> kruskalEdges = new ArrayList<Edge<T>>();
         int count = 0;
 
-        while (count < vertices.size() && !sortedEdges.isEmpty()) {
+        while (count < vertices.size() - 1 && !sortedEdges.isEmpty()) {
             Edge<T> edge = sortedEdges.get(0);
             sortedEdges.remove(0);
 
