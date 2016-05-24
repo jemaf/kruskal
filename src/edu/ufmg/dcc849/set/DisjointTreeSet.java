@@ -1,6 +1,7 @@
 package edu.ufmg.dcc849.set;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,6 +39,12 @@ public class DisjointTreeSet<T> {
     }
 
 
+    public void makeSet(List<T> values) {
+        for (T value : values)
+            this.makeSet(value);
+    }
+
+
     public T findSet(T value) {
         Node<T> node = this.set.get(value);
 
@@ -51,7 +58,7 @@ public class DisjointTreeSet<T> {
     }
 
 
-    public void union(T v1, T v2) {
+    public boolean union(T v1, T v2) {
 
         T v1Root = this.findSet(v1);
         T v2Root = this.findSet(v2);
@@ -68,8 +75,11 @@ public class DisjointTreeSet<T> {
             } else {
                 nodeV1.parent = nodeV2;
             }
+
+            return true;
         }
 
+        return false;
     }
 
 }
