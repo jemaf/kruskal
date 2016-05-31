@@ -8,31 +8,28 @@ import java.util.List;
 /**
  * Created by Vinicius on 21/05/2016.
  */
-//
-//  TODO fix this class
-public class RadixSort<T extends Comparable<T>> implements Sort<T> {
+public class RadixSort implements Sort<Edge<Integer>> {
 
-//    public void runSort(Edge[] edgesToSort) {
-//        int digNum = digNumOfMax(edgesToSort);
-//
-//        for(int i = 1; i <= digNum; i++) {
-//            edgesToSort = new CountingSort().runSortDigit(edgesToSort,i);
-//        }
-//    }
-//
-//    private static int digNumOfMax(Edge[] edgeArray) {
-//        int max = Integer.MIN_VALUE;
-//
-//        for(Edge edge: edgeArray){
-//            if(max < (int)edge.getValue()) {
-//                max = (int)edge.getValue();
-//            }
-//        }
-//        return String.valueOf(max).length();
-//    }
+
+    private static int digNumOfMax(List<Edge<Integer>> edgeArray) {
+        int max = Integer.MIN_VALUE;
+
+        for(Edge<Integer> edge: edgeArray){
+            if(max < edge.getValue()) {
+                max = edge.getValue();
+            }
+        }
+        return String.valueOf(max).length();
+    }
 
     @Override
-    public List<T> sort(List<T> unsortedList) {
-        return null;
+    public List<Edge<Integer>> sort(List<Edge<Integer>> unsortedList) {
+        int digNum = digNumOfMax(unsortedList);
+
+        for(int i = 1; i <= digNum; i++) {
+            unsortedList = (new CountingSort()).runSortDigit(unsortedList, i);
+        }
+
+        return unsortedList;
     }
 }

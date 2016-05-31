@@ -9,17 +9,12 @@ import java.util.List;
 /**
  * Created by Vinicius on 21/05/2016.
  */
-//
-//    TODO fix this class
 public class CountingSort implements Sort<Edge<Integer>> {
 
     @Override
     public List<Edge<Integer>> sort(List<Edge<Integer>> unsortedList) {
 
         int[] countLessThan = new int[findMaxEdge(unsortedList).getValue() + 1];
-
-        for(int i = 0; i < countLessThan.length; i++)
-            countLessThan[i] = 0;
 
         for (Edge<Integer> edge : unsortedList)
             countLessThan[edge.getValue()]++;
@@ -42,43 +37,44 @@ public class CountingSort implements Sort<Edge<Integer>> {
     }
 
 
-//    public Edge[] runSortDigit(Edge[] edgesToSort, int digitPos) {
-//        int[] countLessThan = new int[10];
-//
-//        for(int i = 0; i < 10; i++){
-//            countLessThan[i] = 0;
-//        }
-//
-//        for (Edge edge : edgesToSort) {
-//            int digitValue = getDigit((int)edge.getValue(), digitPos);
-//            countLessThan[digitValue]++;
-//        }
-//
-//        for(int i = 1; i < 10; i++) {
-//            countLessThan[i] += countLessThan[i - 1];
-//        }
-//
-//        Edge[] sortedEdges = new Edge[edgesToSort.length];
-//
-//        for(int i = edgesToSort.length-1; i >= 0; i--) {
-//            int digitValue = getDigit((int)edgesToSort[i].getValue(),digitPos);
-//
-//            sortedEdges[countLessThan[digitValue]-1] = edgesToSort[i];
-//            countLessThan[digitValue]--;
-//        }
-//
-//        return sortedEdges;
-//    }
+    public List<Edge<Integer>> runSortDigit(List<Edge<Integer>> edgesToSort, int digitPos) {
+        int[] countLessThan = new int[10];
 
-//    private static int getDigit(int value, int digitPos) {
-//        int digit = value;
-//
-//        while(digitPos-- > 1) {
-//            digit /= 10;
-//        }
-//
-//        return digit%10;
-//    }
+        for (Edge<Integer> edge : edgesToSort) {
+            int digitValue = getDigit(edge.getValue(), digitPos);
+            countLessThan[digitValue]++;
+        }
+
+        for(int i = 1; i < 10; i++) {
+            countLessThan[i] += countLessThan[i - 1];
+        }
+
+        Edge[] sortedEdges = new Edge[edgesToSort.size()];
+
+        for(int i = edgesToSort.size() - 1; i >= 0; i--) {
+            int digitValue = getDigit(edgesToSort.get(i).getValue(), digitPos);
+
+            sortedEdges[countLessThan[digitValue]-1] = edgesToSort.get(i);
+            countLessThan[digitValue]--;
+        }
+
+        List<Edge<Integer>> sortedList = new ArrayList<Edge<Integer>>();
+        for (Edge<Integer> edge : sortedEdges)
+            sortedList.add(edge);
+
+        return sortedList;
+    }
+
+
+    private static int getDigit(int value, int digitPos) {
+        int digit = value;
+
+        while(digitPos-- > 1) {
+            digit /= 10;
+        }
+
+        return digit%10;
+    }
 
 
     private Edge<Integer> findMaxEdge(List<Edge<Integer>> list) {

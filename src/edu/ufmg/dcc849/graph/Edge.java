@@ -30,6 +30,27 @@ public class Edge<T extends Comparable<T>> implements Comparable<Edge<T>> {
         return this.value.compareTo(edge.value);
     }
 
+
+    /**
+     * Check if two edges are equals. Edges are equals if they have same value, origin and destiny
+     *
+     * @param obj The edge to be compared
+     *
+     * @return true if equals, false otherwise
+     */
+    @Override
+    public boolean equals(Object obj) {
+
+        if (!(obj instanceof Edge))
+            return false;
+
+        Edge<T> edgeObj = (Edge<T>) obj;
+
+        return this.getValue().equals(edgeObj.getValue()) &&
+                this.getOrigin().equals(edgeObj.getOrigin()) &&
+                this.getDestiny().equals(edgeObj.getDestiny());
+    }
+
     public Vertice getOrigin() {
         return origin;
     }

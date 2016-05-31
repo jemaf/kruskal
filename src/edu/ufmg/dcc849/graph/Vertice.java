@@ -18,4 +18,21 @@ public class Vertice {
     public void setName(String name) {
         this.name = name;
     }
+
+
+    /**
+     * Check if two vertices are equals. Vertices are equals if they have same name
+     *
+     * @param obj The vertice to be compared
+     *
+     * @return true if equals, false otherwise
+     */
+    @Override
+    public boolean equals(Object obj) {
+
+        if (!(obj instanceof Vertice))
+            return false;
+
+        return this.name.equals(((Vertice) obj).getName());
+    }
 }

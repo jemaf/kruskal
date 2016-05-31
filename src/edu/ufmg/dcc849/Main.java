@@ -5,6 +5,7 @@ import edu.ufmg.dcc849.graph.Kruskal;
 import edu.ufmg.dcc849.graph.Vertice;
 import edu.ufmg.dcc849.sort.Sort;
 import edu.ufmg.dcc849.sort.comparison.QuickSort;
+import edu.ufmg.dcc849.sort.linear.BucketSort;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +49,8 @@ public class Main {
         edgeList.add(new Edge<Integer>(e, g, 9));
         edgeList.add(new Edge<Integer>(f, g, 11));
 
-        Sort<Edge<Integer>> quickSort = new QuickSort<Edge<Integer>>();
-        Kruskal<Integer> kruskal = new Kruskal<Integer>(quickSort);
+        Sort<Edge<Integer>> bucketSort = new BucketSort();
+        Kruskal<Integer> kruskal = new Kruskal<Integer>(bucketSort);
 
         List<Edge<Integer>> mst = kruskal.execute(edgeList, verticeList);
 
