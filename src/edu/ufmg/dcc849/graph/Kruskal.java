@@ -18,7 +18,10 @@ public class Kruskal<T extends Comparable<T>> {
     }
 
 
-    public List<Edge<T>> execute(List<Edge<T>> edges, List<Vertice> vertices) {
+    public List<Edge<T>> execute(Graph<T> graph) {
+
+        List<Vertice> vertices = graph.getVertices();
+        List<Edge<T>> edges = graph.getEdges();
 
         DisjointTreeSet<Vertice> verticesSet = setDisjointSet(vertices);
         List<Edge<T>> sortedEdges = sort(edges);

@@ -2,6 +2,7 @@ package test.graph;
 
 import com.sun.tools.corba.se.idl.InterfaceGen;
 import edu.ufmg.dcc849.graph.Edge;
+import edu.ufmg.dcc849.graph.Graph;
 import edu.ufmg.dcc849.graph.Kruskal;
 import edu.ufmg.dcc849.graph.Vertice;
 import edu.ufmg.dcc849.sort.Sort;
@@ -19,15 +20,13 @@ import static org.junit.Assert.*;
  */
 public class KruskalTest {
 
-    List<Vertice> verticeList;
-    List<Edge<Integer>> edgeList;
+    Graph<Integer> graph;
     List<Edge<Integer>> minimumSpaningTreeList;
 
     @org.junit.Before
     public void setUp() {
 
-        edgeList = new ArrayList<Edge<Integer>>();
-        verticeList = new ArrayList<Vertice>();
+        graph = new Graph<Integer>();
         minimumSpaningTreeList = new ArrayList<Edge<Integer>>();
 
         // graph based on this link: https://en.wikipedia.org/wiki/Kruskal%27s_algorithm
@@ -39,25 +38,25 @@ public class KruskalTest {
         Vertice f = new Vertice("f");
         Vertice g = new Vertice("g");
 
-        verticeList.add(a);
-        verticeList.add(b);
-        verticeList.add(c);
-        verticeList.add(d);
-        verticeList.add(e);
-        verticeList.add(f);
-        verticeList.add(g);
+        graph.addVertice(a);
+        graph.addVertice(b);
+        graph.addVertice(c);
+        graph.addVertice(d);
+        graph.addVertice(e);
+        graph.addVertice(f);
+        graph.addVertice(g);
 
-        edgeList.add(new Edge<Integer>(a, b, 7));
-        edgeList.add(new Edge<Integer>(a, d, 5));
-        edgeList.add(new Edge<Integer>(b, c, 8));
-        edgeList.add(new Edge<Integer>(b, d, 9));
-        edgeList.add(new Edge<Integer>(b, e, 7));
-        edgeList.add(new Edge<Integer>(c, e, 5));
-        edgeList.add(new Edge<Integer>(d, e, 15));
-        edgeList.add(new Edge<Integer>(d, f, 6));
-        edgeList.add(new Edge<Integer>(e, f, 8));
-        edgeList.add(new Edge<Integer>(e, g, 9));
-        edgeList.add(new Edge<Integer>(f, g, 11));
+        graph.addEdge(new Edge<Integer>(a, b, 7));
+        graph.addEdge(new Edge<Integer>(a, d, 5));
+        graph.addEdge(new Edge<Integer>(b, c, 8));
+        graph.addEdge(new Edge<Integer>(b, d, 9));
+        graph.addEdge(new Edge<Integer>(b, e, 7));
+        graph.addEdge(new Edge<Integer>(c, e, 5));
+        graph.addEdge(new Edge<Integer>(d, e, 15));
+        graph.addEdge(new Edge<Integer>(d, f, 6));
+        graph.addEdge(new Edge<Integer>(e, f, 8));
+        graph.addEdge(new Edge<Integer>(e, g, 9));
+        graph.addEdge(new Edge<Integer>(f, g, 11));
 
         minimumSpaningTreeList.add(new Edge<Integer>(a, b, 7));
         minimumSpaningTreeList.add(new Edge<Integer>(a, d, 5));
@@ -73,7 +72,7 @@ public class KruskalTest {
         Sort<Edge<Integer>> sortingAlgorithm = new RadixSort();
 
         Kruskal<Integer> kruskal = new Kruskal<Integer>(sortingAlgorithm);
-        List<Edge<Integer>> mst = kruskal.execute(edgeList, verticeList);
+        List<Edge<Integer>> mst = kruskal.execute(graph);
 
 
         assertEquals(minimumSpaningTreeList.size(), mst.size());
