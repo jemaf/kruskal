@@ -1,6 +1,6 @@
 package test.graph;
 
-import com.sun.tools.corba.se.idl.InterfaceGen;
+//import com.sun.tools.corba.se.idl.InterfaceGen;
 import edu.ufmg.dcc849.graph.Edge;
 import edu.ufmg.dcc849.graph.Graph;
 import edu.ufmg.dcc849.graph.Kruskal;
