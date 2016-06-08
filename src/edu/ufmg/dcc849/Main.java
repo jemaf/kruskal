@@ -6,6 +6,7 @@ import edu.ufmg.dcc849.sort.comparison.QuickSort;
 import edu.ufmg.dcc849.sort.linear.BucketSort;
 import edu.ufmg.dcc849.sort.linear.CountingSort;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +15,10 @@ import java.util.List;
  */
 public class Main {
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
 
-        CompleteGraphGenerator generator = new CompleteGraphGenerator(50);
-        Graph testGraph = generator.generateNormalDist(20);
+        CompleteGraphGenerator generator = new CompleteGraphGenerator(500, 50000, 1);
+        Graph testGraph = generator.run();
 
         List<Edge<Integer>> edgeList = testGraph.getEdges();
 
