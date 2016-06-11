@@ -7,12 +7,12 @@ import java.util.List;
  * Created by Vinicius on 04/06/2016.
  */
 public class CompleteGraphGenerator {
-    private Integer verticeNum;
+    private Integer vertexNum;
     private Integer maxWeight;
     private Integer caseNum;
 
     public CompleteGraphGenerator(Integer verticeNum, Integer maxWeight, Integer caseNum) {
-        this.verticeNum = verticeNum;
+        this.vertexNum = verticeNum;
         this.maxWeight = maxWeight;
         this.caseNum = caseNum;
     }
@@ -29,21 +29,21 @@ public class CompleteGraphGenerator {
     public Graph run() throws IOException {
         Graph newGraph = new Graph();
 
-        for(Integer i = 0; i < this.verticeNum; i++){
+        for(Integer i = 0; i < vertexNum; i++){
             newGraph.addVertice(new Vertice(i.toString()));
         }
 
-        for(Integer j = 1; j < this.verticeNum; j++){
+        for(Integer j = 1; j < vertexNum; j++){
             Vertice from = (Vertice) newGraph.getVertices().get(0);
             Vertice to = (Vertice) newGraph.getVertices().get(j);
 
             Edge newEdge = null;
 
-            if(this.caseNum == 1)
-                newEdge = new Edge<Integer>(from, to, (int) (Math.random()*this.maxWeight));
-            else if(this.caseNum == 2)
-                newEdge = new Edge<Integer>(from, to, this.maxWeight);
-            else if(this.caseNum == 3)
+            if(caseNum == 1)
+                newEdge = new Edge<Integer>(from, to, (int) (Math.random()*maxWeight));
+            else if(caseNum == 2)
+                newEdge = new Edge<Integer>(from, to, maxWeight);
+            else if(caseNum == 3)
                 newEdge = new Edge<Integer>(from, to, 0);
             else{
                 IOException e = new IOException();
@@ -53,15 +53,46 @@ public class CompleteGraphGenerator {
             newGraph.addEdge(newEdge);
         }
 
-        for(Integer i = 1; i < this.verticeNum; i++){
-            for(Integer j = i+1; j < this.verticeNum; j++){
+        for(Integer i = 1; i < vertexNum; i++){
+            for(Integer j = i+1; j < vertexNum; j++){
                 Vertice from = (Vertice) newGraph.getVertices().get(i);
                 Vertice to = (Vertice) newGraph.getVertices().get(j);
 
-                Edge newEdge = new Edge<Integer>(from, to, (int) (Math.random()*this.maxWeight));
+                Edge newEdge = new Edge<Integer>(from, to, (int) (Math.random()*maxWeight));
 
                 newGraph.addEdge(newEdge);
             }
+        }
+
+        return newGraph;
+    }
+
+    public Graph rewriteEdges(Graph graph){
+        List<Edge<Integer>> edgeList = graph.getEdges();
+        Integer edgesNum = edgeList.size();
+
+        Graph newGraph = graph;
+
+        /*
+         * Rewriting first n-1 special edges, according to the selected case
+         */
+        for(Integer i = 0; i < (vertexNum - 1); i++){
+            Edge currEdge = edgeList.get(i);
+            if(caseNum == 1)
+                currEdge.setValue((int) (Math.random()*maxWeight));
+            else if(caseNum == 2)
+                currEdge.setValue(maxWeight);
+            else if(caseNum == 3)
+                currEdge.setValue(0);
+
+            newGraph.setEdge(i,currEdge);
+        }
+
+        for (Integer i = (vertexNum - 1); i < edgesNum; i++){
+            Edge currEdge = edgeList.get(i);
+            currEdge.setValue((int) (Math.random()*maxWeight));
+
+            newGraph.setEdge(i,currEdge);
         }
 
         return newGraph;

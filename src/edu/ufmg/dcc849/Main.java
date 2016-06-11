@@ -15,10 +15,11 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String args[]) throws IOException {
-        Integer maxVertexNum = Integer.parseInt(args[0]);
-        Integer caseNum = Integer.parseInt(args[1]);
-        Integer maxRunTime = Integer.parseInt(args[2]);
-        Double tValue = Double.parseDouble(args[3]);
+        Integer startVertexNum = Integer.parseInt(args[0]);
+        Integer endVertexNum = Integer.parseInt(args[1]);
+        Integer caseNum = Integer.parseInt(args[2]);
+        Integer maxRunTime = Integer.parseInt(args[3]);
+        Double tValue = Double.parseDouble(args[4]);
 
         //Execution time for each run and each algorithm
         Double[] execTimeCounting = new Double[maxRunTime];
@@ -37,14 +38,17 @@ public class Main {
 
         System.out.println("Vertex_Num\tAvg_Couting\tIC_Counting\tAvg_Bucket\tIC_Bucket\tAvg_Quick\tIC_Quick");
 
-        for(Integer currVertexNum = 10; currVertexNum <= maxVertexNum; currVertexNum += 10){ //Varies the number of vertices
+        for(Integer currVertexNum = startVertexNum; currVertexNum <= endVertexNum; currVertexNum += 10){ //Varies the number of vertices
             /*
              * Execute the algorithms for different instances of graphs with the same settings
              */
+            CompleteGraphGenerator currGen = new CompleteGraphGenerator(currVertexNum,
+                    2 * currVertexNum, caseNum);
+            Graph currGraphInstance = currGen.run();
+
             for(Integer currRunTime = 0; currRunTime < maxRunTime; currRunTime++) {
-                CompleteGraphGenerator currGen = new CompleteGraphGenerator(currVertexNum,
-                        2 * currVertexNum, caseNum);
-                Graph currGraphInstance = currGen.run();
+                if(currRunTime > 0)
+                    currGraphInstance = currGen.rewriteEdges(currGraphInstance);
 
                 startTime = System.currentTimeMillis();
                 kruskalCounting.execute(currGraphInstance);

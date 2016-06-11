@@ -29,6 +29,10 @@ public class Graph<T extends Comparable<T>> {
         return edges;
     }
 
+    public void setEdge(Integer index, Edge<T> edge){
+        edges.set(index, edge);
+    }
+
     public List<Vertice> getVertices() {
         return vertices;
     }
