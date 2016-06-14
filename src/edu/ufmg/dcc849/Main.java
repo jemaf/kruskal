@@ -38,7 +38,7 @@ public class Main {
 
         System.out.println("Vertex_Num\tAvg_Couting\tIC_Counting\tAvg_Bucket\tIC_Bucket\tAvg_Quick\tIC_Quick");
 
-        for(Integer currVertexNum = startVertexNum; currVertexNum <= endVertexNum; currVertexNum += 10){ //Varies the number of vertices
+        for(Integer currVertexNum = startVertexNum; currVertexNum <= endVertexNum; currVertexNum += (currVertexNum*10)/100){ //Varies the number of vertices
             /*
              * Execute the algorithms for different instances of graphs with the same settings
              */
