@@ -24,7 +24,7 @@ public class Statistics {
         Double temp = 0.0;
         for(Double a : this.data)
             temp += (mean-a)*(mean-a);
-        return temp/this.size;
+        return temp/(this.size-1);
     }
 
     public Double getStdDev(){
@@ -32,6 +32,6 @@ public class Statistics {
     }
 
     public Double getConfidenceInterval(Double tValue){
-        return tValue*(getStdDev()/this.size);
+        return tValue*(getStdDev()/Math.sqrt(this.size));
     }
 }
