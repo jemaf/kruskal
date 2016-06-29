@@ -48,7 +48,7 @@ public class Main {
              * Execute the algorithms for different instances of graphs with the same settings
              */
             CompleteGraphGenerator currGen = new CompleteGraphGenerator(currVertexNum,
-                    2 * currVertexNum, caseNum);
+                    (((currVertexNum*(currVertexNum-1))/2)-1), caseNum);
             Graph currGraphInstance = currGen.run();
 
             for(Integer currRunTime = 0; currRunTime < maxRunTime; currRunTime++) {
